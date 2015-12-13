@@ -24,10 +24,10 @@ function getSum(hand)
 {
 	var sum = 0;
 	//сначала считаем все карты кроме тузов
-	for(int i=0; i<hand.length; i++)
+	for(var i = 0; i<hand.length; i++)
 	{
 		var card = hand[i];
-		if((card != 'A') && ((card == 'J') || (card == 'D') || (card == 'K')))
+		if((card != 'A') && ((card == 'J') || (card == 'Q') || (card == 'K')))
 		{
 				sum += 10;
 		}else
@@ -43,6 +43,7 @@ function getSum(hand)
 			sum += parseInt(card);
 		}
 	}
+	return sum;
 }
 
 //получаем статус
@@ -62,7 +63,7 @@ var answer = '';
 if(getSum(player) == 21)
 {
 	alert("Вам повезло, BlackJack на раздаче!!!");
-	break;
+	//break;
 }else{
 //главный цикл программы
 do
@@ -112,9 +113,6 @@ do
 			alert("Проигрыш " + getStatus());
 		}
 	}
-
-	//спрашиваем статус
-	alert(getStatus());
 
 }while(answer != '1');
 }
