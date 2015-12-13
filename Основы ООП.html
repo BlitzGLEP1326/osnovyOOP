@@ -59,6 +59,11 @@ var player = [getCard(), getCard()];
 //переменная для получения ответа на дальнейшие действия программы
 var answer = '';
 
+if(getSum(player) == 21)
+{
+	alert("Вам повезло, BlackJack на раздаче!!!");
+	break;
+}else{
 //главный цикл программы
 do
 {
@@ -68,10 +73,51 @@ do
 	{
 		player.push(getCard());
 	}
+
+	//проверяем, нет ли перебора или выйгрыша
+	sum = getSum(player);
+	if(sum>21)
+	{
+		alert("Перебор " + getStatus());
+		break;
+	}else if(sum == 21)
+	{
+		alert("BlackJack!!! " + getStatus());
+		break;
+	}else //в игру вступает дилер
+	{
+		while(getSum(dealer) < 17)
+		{
+			dealer.push(getCard());
+		};
+
+		//проверяем результат
+		var sumDealer = getSum(dealer);
+		var sumPlayer = getSum(player);
+
+		if(sumDealer == 21)
+		{
+			alert("У дилера BlackJack!!! " + getStatus());
+		}else if(sumDealer > 21)
+		{
+			alert("У дилера перебор! " + getStatus());
+		}else if(sumDealer == sumPlayer)
+		{
+			alert("Ничья!!! " + getStatus());
+		}else if(sumPlayer > sumDealer)
+		{
+			alert("Выйгрыш!!! " + getStatus());
+		}else
+		{
+			alert("Проигрыш " + getStatus());
+		}
+	}
+
 	//спрашиваем статус
 	alert(getStatus());
 
 }while(answer != '1');
+}
 
 
 </script>
