@@ -1,6 +1,77 @@
+
 <meta charset = utf-8>
+
 <script>
 
+//приветственное сообщение
+alert("BlackJack Game");
+
+//получаем рандомное значение
+function getRandomInt(min, max)
+{
+	return Math.floor(Math.random() * (max - min +1)) + min;
+}
+
+//получаем карту
+function getCard()
+{
+	var cards = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+	return cards[getRandomInt(0, cards.length - 1)];
+}
+
+//функция подсчета суммы карт у игрока
+function getSum(hand)
+{
+	var sum = 0;
+	//сначала считаем все карты кроме тузов
+	for(int i=0; i<hand.length; i++)
+	{
+		var card = hand[i];
+		if((card != 'A') && ((card == 'J') || (card == 'D') || (card == 'K')))
+		{
+				sum += 10;
+		}else
+		{
+			//туз считается как 1 если текущая сумма больше 10, иначе - как 11
+			if(sum>10)
+			{
+				sum += 1;
+			}else
+			{
+				sum += 11;
+			}
+			sum += parseInt(card);
+		}
+	}
+}
+
+//получаем статус
+function getStatus()
+{
+	return 'Дилер: ' + dealer.join(' ') + ' Игрок: ' + player.join(' ') + '.';
+}
+
+//дилер - массив из одного значений
+var dealer = [getCard()];
+//игрок - массив из двух значений
+var player = [getCard(), getCard()];
+
+//переменная для получения ответа на дальнейшие действия программы
+var answer = '';
+
+//главный цикл программы
+do
+{
+	answer = prompt(getStatus() + ' Хотите еще карту? 1 - да, иначе - нет');
+	//сдаем карту игроку или прекращаем игру
+	if(answer == '1')
+	{
+		player.push(getCard());
+	}
+	//спрашиваем статус
+	alert(getStatus());
+
+}while(answer != '1');
 
 
 </script>
